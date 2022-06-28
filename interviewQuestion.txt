@@ -1,0 +1,103 @@
+Q1. What is the difference between Cookie / Local Storage / Session Storage?
+
+Ans - 
+
+Cookies store small amounts of data that has to be sent back to the server with subsequent requests and their expiration can be set from either server or client. They are primarily used for server-side reading.
+
+• Capacity: 4KB
+• Accessible from: Any window
+• Expiration: Manually set
+• Storage location: Browser and server
+• Sent with requests: Yes
+• Blockable by users: Yes
+• Editable by users: Yes
+
+Local storage
+Local storage stores a larger amount of data on the client's computer in a key-value pair format and has no expiration date. Data is never transferred to the server and is accessible via JavaScript and HTML5.
+
+• Capacity: 10MB
+•  Expiration: Never
+•  Accessible from: Any window
+•  Storage location: Browser only
+•  Sent with requests: No
+•  Blockable by users: Yes
+•  Editable by users: Yes
+
+Session storage
+  Session storage stores a larger amount of data on the client's computer only for the current session, expiring the data on tab close. Data is never transferred to the server and is accessible client-side from the same tab.
+
+• Capacity: 5MB
+• Accessible from: Same tab
+• Expiration: On tab close
+• Storage location: Browser only
+• Sent with requests: No
+• Blockable by users: Yes
+• Editable by users: Yes
+
+Q2. What is the significance of, and reason for, wrapping the entire content of a JavaScript source
+file in a function block?
+
+
+
+It is common practice to wrap browser JavaScript in an IIFE in order to keep variables private and not pollute the global scope.
+
+Global variables are generally considered bad. They encourage error-prone patterns and make it more difficult to reason about your programs.
+
+Node.js has a nifty trick up its sleeve where it actually wraps your module in a function automagically on your behalf. As a result, you will almost never see anyone wrap their Node.js code in an IIFE. Though you may still see it used inline to scope a small chunk of code.
+
+{
+    const foo = 1;
+    // ... code that you would put in an IIFE ...
+    // ... but do NOT use `var` ...
+}
+console.log(foo);  // ReferenceError: foo is not defined
+
+Q3. What will the code below output? Explain your answer.
+
+console.log(0.1 + 0.2); 
+
+Output:0.30000000000000004
+
+console.log(0.1 + 0.2 == 0.3);
+
+Output : False because  they are not equal
+
+Q4. Write a sum method which will work properly when invoked using either syntax below.
+
+console.log(sum(2,3)); // Outputs 5
+
+function sum(a,b){
+        return a + b
+    }
+console.log(sum(2,3))
+
+
+console.log(sum(2)(3)); // Outputs 5
+
+function sum(a){
+    return function(b){
+        return a + b
+    }
+}
+console.log(sum(2)(3))
+
+Q5.What is the output of the following code?
+
+var length = 10;
+function fn() {
+console.log(this.length);
+}
+
+
+var obj = {
+length: 5,
+method: function(fn) {
+fn();
+arguments[0]();
+}
+};
+obj.method(fn, 1);
+
+Output : undefined 2
+
+Reason : undefined is coming due to var variable and  its functional scope
